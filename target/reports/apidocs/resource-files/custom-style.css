@@ -1,0 +1,41 @@
+/* Global Variables */
+:root {
+    --primary-green: #198754;
+    --primary-green-dark: #157347;
+    --primary-green-light: rgba(25, 135, 84, 0.1);
+    --transition-speed: 0.3s;
+}
+
+/* Global Transitions & Animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Custom Scrollbar for a modern look */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-green-dark);
+}
+
+/* Shared Component Styles */
+.text-success-custom {
+    color: var(--primary-green) !important;
+}
+
+.bg-success-custom {
+    background-color: var(--primary-green) !important;
+}

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPD Project Manual</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        h1 { font-size: 2.2em; }
+        h2 { font-size: 1.8em; }
+        h3 { font-size: 1.4em; }
+        h4 { font-size: 1.2em; }
+        p {
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        ol {
+            list-style-type: decimal;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        code {
+            background-color: #eef;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #eef;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .warning {
+            background-color: #f8d7da;
+            border-left: 5px solid #dc3545;
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OPD Project Manual</h1>
+        <p>This document serves as a comprehensive manual for the Outpatient Department (OPD) management system. It covers the project's architecture, core functionalities, technical stack, security considerations, and deployment procedures.</p>
+        <p>For end-user instructions, please refer to the <a href="OPD_User_Manual.jsp">OPD User Manual</a>.</p>
+
+        <h2>1. Project Overview</h2>
+        <p>The OPD project is a web-based application designed to streamline the management of outpatient services within a medical facility. It facilitates appointment scheduling, patient record keeping, user management, and provides different interfaces for various user roles.</p>
+
+        <h3>1.1. Key Features</h3>
+        <ul>
+            <li>User Authentication & Authorization (Login, Registration, Password Reset)</li>
+            <li>Role-Based Access Control (Super Admin, Admin, Staff, Doctor, Patient)</li>
+            <li>Appointment Management (Booking, Viewing, Status Updates, Rescheduling)</li>
+            <li>Patient Profile & Medical History Viewing</li>
+            <li>User Account Management (Create, Archive, Restore, Delete)</li>
+            <li>File Uploads (Profile Pictures, Appointment Attachments)</li>
+            <li>Audit Logging for critical actions</li>
+            <li>Basic Reporting and Analytics</li>
+        </ul>
+
+        <h2>2. Technical Stack</h2>
+        <ul>
+            <li><strong>Backend:</strong> Java (Jakarta EE Servlets)</li>
+            <li><strong>Frontend:</strong> JavaServer Pages (JSP), JSTL, HTML, CSS, JavaScript</li>
+            <li><strong>Build Tool:</strong> Apache Maven</li>
+            <li><strong>Database:</strong> MariaDB (local development), PostgreSQL (Render deployment)</li>
+            <li><strong>Web Server:</strong> Apache Tomcat (via webapp-runner for Render)</li>
+            <li><strong>External Services:</strong> Semaphore (for OTP/SMS)</li>
+        </ul>
+
+        <h2>3. Architecture and Design</h2>
+        <p>The project adheres to the Model-View-Controller (MVC) architectural pattern, a standard for web applications.</p>
+
+        <h3>3.1. MVC Components</h3>
+        <ul>
+            <li><strong>Model:</strong> Java POJOs (e.g., <code>Patient</code>, <code>Appointment</code>, <code>User</code>) representing data structures, and the database schema.</li>
+            <li><strong>View:</strong> JavaServer Pages (JSP) files responsible for rendering the user interface. JSTL is used for dynamic content.</li>
+            <li><strong>Controller:</strong> Java Servlets (e.g., <code>StaffAddAppointmentServlet</code>, <code>LoginServlet</code>) handling user requests, processing business logic, interacting with the database, and dispatching to the appropriate view.</li>
+        </ul>
+
+        <h3>3.2. Database Interaction</h3>
+        <p>Database operations are performed directly within the Servlets using JDBC. The <code>DBUtil</code> class manages database connection pooling.</p>
+        <div class="warning">
+            <h4>Architectural Improvement Needed: DAO/Service Layer</h4>
+            <p>Currently, database logic is tightly coupled within the Servlets. For improved maintainability, testability, and reduced code duplication, it is highly recommended to introduce a dedicated Data Access Object (DAO) layer and a Service layer.</p>
+            <p><strong>DAO Layer:</strong> Abstracts database operations (CRUD) for specific models (e.g., <code>PatientDAO</code>, <code>AppointmentDAO</code>).</p>
+            <p><strong>Service Layer:</strong> Encapsulates business logic, orchestrating calls to multiple DAOs if necessary.</p>
+        </div>
+
+        <h2>4. Database Schema (MariaDB / PostgreSQL)</h2>
+        <p>The database schema is designed to manage users, appointments, patient profiles, and related medical data. Key tables include:</p>
+        <ul>
+            <li><code>users</code>: Stores user authentication details (username, password hash, contact, user type).</li>
+            <li><code>user_profiles</code>: Stores detailed profile information for each user (surname, given name, DOB, address, specialization, etc.). Linked to <code>users</code> via <code>user_id</code>.</li>
+            <li><code>appointments</code>: Records all appointment details, linking to patients (via <code>booked_by_user_id</code> or <code>relative_id</code>), doctors, and rooms.</li>
+            <li><code>patient_relatives</code>: Stores information about relatives associated with a patient.</li>
+            <li><code>appointed_relatives</code>: Manages relationships between patients and appointed relatives (e.g., guardians).</li>
+            <li><code>rooms</code>: Defines available rooms for appointments.</li>
+            <li><code>services</code>: Lists available medical services.</li>
+            <li><code>specializations</code>: Lists medical specializations for doctors.</li>
+            <li><code>designations</code>: Lists staff designations.</li>
+            <li><code>audit_logs</code>: Records significant user actions for auditing purposes.</li>
+            <li><code>notifications</code>: Stores system notifications.</li>
+            <li><code>daily_reports</code>: Stores paths to generated daily reports.</li>
+            <li><code>months</code>: A utility table for month names.</li>
+        </ul>
+        <p>Relationships are enforced using foreign key constraints to maintain data integrity.</p>
+
+        <h2>5. Key Functionalities and User Roles</h2>
+
+        <h3>5.1. User Authentication & Authorization</h3>
+        <ul>
+            <li><strong>Login:</strong> Users authenticate with username and password. Password hashes are stored securely.</li>
+            <li><strong>Registration:</strong> New patient accounts can be created.</li>
+            <li><strong>Password Reset:</strong> Utilizes OTP via Semaphore for secure password recovery.</li>
+            <li><strong>Role-Based Access:</strong> Access to Servlets and JSPs is restricted based on <code>userType</code> (Super Admin, Admin, Staff, Doctor, Patient) stored in the session.</li>
+        </ul>
+        <div class="warning">
+            <h4>Security Improvement Needed: Centralized Authorization</h4>
+            <p>Authorization checks are currently performed at the beginning of each Servlet. This approach is prone to errors and difficult to maintain. Implementing a <code>jakarta.servlet.Filter</code> for centralized authentication and authorization is strongly recommended.</p>
+        </div>
+
+        <h3>5.2. Appointment Management</h3>
+        <ul>
+            <li><strong>Booking:</strong> Staff can book appointments for new or existing patients, assigning doctors and rooms.</li>
+            <li><strong>Viewing:</strong>
+                <ul>
+                    <li><strong>Patients:</strong> View their own upcoming and past appointments.</li>
+                    <li><strong>Doctors:</strong> View appointments assigned to them.</li>
+                    <li><strong>Staff:</strong> View all appointments, filter by status, and manage details.</li>
+                </ul>
+            </li>
+            <li><strong>Status Updates:</strong> Appointments can be marked as Pending, Assigned, Accepted, Rejected, or Completed.</li>
+            <li><strong>Rescheduling:</strong> Functionality to propose new dates for appointments.</li>
+        </ul>
+
+        <h3>5.3. Patient Records</h3>
+        <ul>
+            <li><strong>Staff/Doctors:</strong> Can view detailed patient profiles and their medical/appointment history.</li>
+            <li><strong>Patients:</strong> Can view their own profile and medical records.</li>
+            <li><strong>Relatives:</strong> Can view medical records of patients they are appointed to.</li>
+        </ul>
+
+        <h3>5.4. User Management (Super Admin / Admin)</h3>
+        <ul>
+            <li><strong>Create Accounts:</strong> Super Admins can create Admin, Staff, and Doctor accounts. Admins can create Staff and Doctor accounts.</li>
+            <li><strong>Archive/Restore:</strong> Users can be archived (deactivated) and restored.</li>
+            <li><strong>Permanent Delete:</strong> Users can be permanently removed from the system.</li>
+        </ul>
+
+        <h3>5.5. File Uploads</h3>
+        <ul>
+            <li><strong>Profile Pictures:</strong> Users can upload profile pictures.</li>
+            <li><strong>Appointment Attachments:</strong> Patients can upload relevant documents for appointments.</li>
+        </ul>
+        <div class="warning">
+            <h4>Critical for Cloud Deployment: Persistent Storage</h4>
+            <p>For cloud deployments (like Render), the application's local filesystem is ephemeral. All uploaded files will be lost on redeployment or restart. A persistent storage solution (e.g., Render Disk, AWS S3, Google Cloud Storage) is mandatory.</p>
+        </div>
+
+        <h2>6. Deployment to Render</h2>
+        <p>Deploying the project to Render involves adapting the application for a PostgreSQL database and persistent storage.</p>
+
+        <h3>6.1. Pre-Deployment Steps</h3>
+        <ol>
+            <li><strong>Add PostgreSQL JDBC Driver:</strong> Include <code>org.postgresql:postgresql</code> dependency in <code>pom.xml</code>.</li>
+            <li><strong>Update <code>DBUtil.java</code>:</strong> Modify <code>DBUtil</code> to parse Render's <code>DATABASE_URL</code> environment variable for PostgreSQL connections, while retaining local MariaDB fallback.</li>
+            <li><strong>Handle File Uploads:</strong> Change file save paths in Servlets to use a Render Disk's mount path (e.g., <code>/var/data/uploads</code>).</li>
+            <li><strong>Externalize Secrets:</strong> Ensure sensitive data like <code>SEMAPHORE_API_KEY</code> and database passwords are read from environment variables (e.g., via <code>.env</code> locally, directly on Render).</li>
+        </ol>
+
+        <h3>6.2. Render Configuration</h3>
+        <ol>
+            <li><strong>Git Repository:</strong> Push your project to GitHub or GitLab.</li>
+            <li><strong>Render Web Service:</strong> Create a new Web Service on Render.
+                <ul>
+                    <li><strong>Runtime:</strong> Docker</li>
+                    <li><strong>Build Command:</strong> <code>mvn clean install</code></li>
+                    <li><strong>Start Command:</strong> <code>java -jar target/dependency/webapp-runner.jar --port $PORT target/*.war</code></li>
+                </ul>
+            </li>
+            <li><strong>Add <code>webapp-runner</code>:</strong> Include the <code>maven-dependency-plugin</code> in <code>pom.xml</code> to copy <code>webapp-runner.jar</code>.</li>
+            <li><strong>Render PostgreSQL Database:</strong> Create a new PostgreSQL service on Render and copy its Internal Connection URL.</li>
+            <li><strong>Set Environment Variables:</strong> Configure <code>DATABASE_URL</code> (from Render PostgreSQL) and <code>SEMAPHORE_API_KEY</code> in the Web Service's environment settings.</li>
+            <li><strong>Attach Render Disk:</strong> Create and attach a Disk (e.g., named <code>opd-uploads</code>, mounted at <code>/var/data/uploads</code>) to your Web Service for persistent file storage.</li>
+            <li><strong>Initial Database Setup:</strong> After deployment, connect to the Render PostgreSQL database and execute the PostgreSQL-compatible schema script to create tables and populate initial data.</li>
+        </ol>
+
+        <h2>7. Future Enhancements</h2>
+        <ul>
+            <li><strong>Implement DAO and Service Layers:</strong> Decouple database logic from Servlets.</li>
+            <li><strong>Centralized Security Filter:</strong> Implement a <code>jakarta.servlet.Filter</code> for robust and maintainable authentication/authorization.</li>
+            <li><strong>Improved Logging:</strong> Integrate a logging framework (e.g., SLF4J with Logback) for better error tracking and debugging.</li>
+            <li><strong>Modern Frontend Framework:</strong> Consider using a JavaScript framework (React, Angular, Vue) for a more dynamic and responsive user interface, interacting with the backend via REST APIs.</li>
+            <li><strong>Asynchronous Operations:</strong> For long-running tasks (e.g., report generation), consider asynchronous processing.</li>
+            <li><strong>Comprehensive Unit/Integration Tests:</strong> Develop tests for backend logic and database interactions.</li>
+        </ul>
+    </div>
+</body>
+</html>

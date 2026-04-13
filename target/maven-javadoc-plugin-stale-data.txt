@@ -1,0 +1,80 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+--no-fonts
+-classpath
+'C:/Users/UwU/.m2/repository/jakarta/platform/jakarta.jakartaee-api/10.0.0/jakarta.jakartaee-api-10.0.0.jar;C:/Users/UwU/.m2/repository/jakarta/platform/jakarta.jakartaee-web-api/10.0.0/jakarta.jakartaee-web-api-10.0.0.jar;C:/Users/UwU/.m2/repository/jakarta/servlet/jsp/jakarta.servlet.jsp-api/3.1.0/jakarta.servlet.jsp-api-3.1.0.jar;C:/Users/UwU/.m2/repository/jakarta/faces/jakarta.faces-api/4.0.1/jakarta.faces-api-4.0.1.jar;C:/Users/UwU/.m2/repository/jakarta/ws/rs/jakarta.ws.rs-api/3.1.0/jakarta.ws.rs-api-3.1.0.jar;C:/Users/UwU/.m2/repository/jakarta/websocket/jakarta.websocket-api/2.1.0/jakarta.websocket-api-2.1.0.jar;C:/Users/UwU/.m2/repository/jakarta/websocket/jakarta.websocket-client-api/2.1.0/jakarta.websocket-client-api-2.1.0.jar;C:/Users/UwU/.m2/repository/jakarta/json/jakarta.json-api/2.1.0/jakarta.json-api-2.1.0.jar;C:/Users/UwU/.m2/repository/jakarta/json/bind/jakarta.json.bind-api/3.0.0/jakarta.json.bind-api-3.0.0.jar;C:/Users/UwU/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar;C:/Users/UwU/.m2/repository/jakarta/ejb/jakarta.ejb-api/4.0.1/jakarta.ejb-api-4.0.1.jar;C:/Users/UwU/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar;C:/Users/UwU/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar;C:/Users/UwU/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar;C:/Users/UwU/.m2/repository/jakarta/interceptor/jakarta.interceptor-api/2.1.0/jakarta.interceptor-api-2.1.0.jar;C:/Users/UwU/.m2/repository/jakarta/enterprise/jakarta.enterprise.cdi-api/4.0.1/jakarta.enterprise.cdi-api-4.0.1.jar;C:/Users/UwU/.m2/repository/jakarta/enterprise/jakarta.enterprise.lang-model/4.0.1/jakarta.enterprise.lang-model-4.0.1.jar;C:/Users/UwU/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar;C:/Users/UwU/.m2/repository/jakarta/authentication/jakarta.authentication-api/3.0.0/jakarta.authentication-api-3.0.0.jar;C:/Users/UwU/.m2/repository/jakarta/security/enterprise/jakarta.security.enterprise-api/3.0.0/jakarta.security.enterprise-api-3.0.0.jar;C:/Users/UwU/.m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar;C:/Users/UwU/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.0/jakarta.activation-api-2.1.0.jar;C:/Users/UwU/.m2/repository/jakarta/mail/jakarta.mail-api/2.1.0/jakarta.mail-api-2.1.0.jar;C:/Users/UwU/.m2/repository/jakarta/resource/jakarta.resource-api/2.1.0/jakarta.resource-api-2.1.0.jar;C:/Users/UwU/.m2/repository/jakarta/authorization/jakarta.authorization-api/2.1.0/jakarta.authorization-api-2.1.0.jar;C:/Users/UwU/.m2/repository/jakarta/batch/jakarta.batch-api/2.1.1/jakarta.batch-api-2.1.1.jar;C:/Users/UwU/.m2/repository/net/lingala/zip4j/zip4j/2.11.5/zip4j-2.11.5.jar;C:/Users/UwU/.m2/repository/jakarta/servlet/jsp/jstl/jakarta.servlet.jsp.jstl-api/3.0.0/jakarta.servlet.jsp.jstl-api-3.0.0.jar;C:/Users/UwU/.m2/repository/jakarta/servlet/jakarta.servlet-api/6.0.0/jakarta.servlet-api-6.0.0.jar;C:/Users/UwU/.m2/repository/jakarta/el/jakarta.el-api/5.0.0/jakarta.el-api-5.0.0.jar;C:/Users/UwU/.m2/repository/org/glassfish/web/jakarta.servlet.jsp.jstl/3.0.1/jakarta.servlet.jsp.jstl-3.0.1.jar;C:/Users/UwU/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar;C:/Users/UwU/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar;C:/Users/UwU/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'C:/Users/UwU/OneDrive/Documents/NetBeansProjects/OPD/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2026. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/UwU/OneDrive/Documents/NetBeansProjects/OPD/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'OPD-1.0-SNAPSHOT 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'OPD-1.0-SNAPSHOT 1.0-SNAPSHOT API'
+com.mycompany.opd
+com.mycompany.opd.models
+com.mycompany.opd.resources
+C:\Users\UwU\.m2\repository\jakarta\platform\jakarta.jakartaee-api\10.0.0\jakarta.jakartaee-api-10.0.0.jar = 1757121788591
+C:\Users\UwU\.m2\repository\jakarta\platform\jakarta.jakartaee-web-api\10.0.0\jakarta.jakartaee-web-api-10.0.0.jar = 1757121788898
+C:\Users\UwU\.m2\repository\jakarta\servlet\jsp\jakarta.servlet.jsp-api\3.1.0\jakarta.servlet.jsp-api-3.1.0.jar = 1757121788924
+C:\Users\UwU\.m2\repository\jakarta\faces\jakarta.faces-api\4.0.1\jakarta.faces-api-4.0.1.jar = 1757121789025
+C:\Users\UwU\.m2\repository\jakarta\ws\rs\jakarta.ws.rs-api\3.1.0\jakarta.ws.rs-api-3.1.0.jar = 1757121788900
+C:\Users\UwU\.m2\repository\jakarta\websocket\jakarta.websocket-api\2.1.0\jakarta.websocket-api-2.1.0.jar = 1757121789239
+C:\Users\UwU\.m2\repository\jakarta\websocket\jakarta.websocket-client-api\2.1.0\jakarta.websocket-client-api-2.1.0.jar = 1757121789854
+C:\Users\UwU\.m2\repository\jakarta\json\jakarta.json-api\2.1.0\jakarta.json-api-2.1.0.jar = 1757121789987
+C:\Users\UwU\.m2\repository\jakarta\json\bind\jakarta.json.bind-api\3.0.0\jakarta.json.bind-api-3.0.0.jar = 1757121789878
+C:\Users\UwU\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar = 1725797936842
+C:\Users\UwU\.m2\repository\jakarta\ejb\jakarta.ejb-api\4.0.1\jakarta.ejb-api-4.0.1.jar = 1757121789558
+C:\Users\UwU\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar = 1727788226343
+C:\Users\UwU\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar = 1727788225684
+C:\Users\UwU\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar = 1734116875643
+C:\Users\UwU\.m2\repository\jakarta\interceptor\jakarta.interceptor-api\2.1.0\jakarta.interceptor-api-2.1.0.jar = 1757121789655
+C:\Users\UwU\.m2\repository\jakarta\enterprise\jakarta.enterprise.cdi-api\4.0.1\jakarta.enterprise.cdi-api-4.0.1.jar = 1757121789626
+C:\Users\UwU\.m2\repository\jakarta\enterprise\jakarta.enterprise.lang-model\4.0.1\jakarta.enterprise.lang-model-4.0.1.jar = 1757121790172
+C:\Users\UwU\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar = 1727788225730
+C:\Users\UwU\.m2\repository\jakarta\authentication\jakarta.authentication-api\3.0.0\jakarta.authentication-api-3.0.0.jar = 1757121790620
+C:\Users\UwU\.m2\repository\jakarta\security\enterprise\jakarta.security.enterprise-api\3.0.0\jakarta.security.enterprise-api-3.0.0.jar = 1757121789912
+C:\Users\UwU\.m2\repository\jakarta\jms\jakarta.jms-api\3.1.0\jakarta.jms-api-3.1.0.jar = 1757121789936
+C:\Users\UwU\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.0\jakarta.activation-api-2.1.0.jar = 1757121789973
+C:\Users\UwU\.m2\repository\jakarta\mail\jakarta.mail-api\2.1.0\jakarta.mail-api-2.1.0.jar = 1757121790014
+C:\Users\UwU\.m2\repository\jakarta\resource\jakarta.resource-api\2.1.0\jakarta.resource-api-2.1.0.jar = 1757121790040
+C:\Users\UwU\.m2\repository\jakarta\authorization\jakarta.authorization-api\2.1.0\jakarta.authorization-api-2.1.0.jar = 1757121790596
+C:\Users\UwU\.m2\repository\jakarta\batch\jakarta.batch-api\2.1.1\jakarta.batch-api-2.1.1.jar = 1757121791102
+C:\Users\UwU\.m2\repository\net\lingala\zip4j\zip4j\2.11.5\zip4j-2.11.5.jar = 1764941544000
+C:\Users\UwU\.m2\repository\jakarta\servlet\jsp\jstl\jakarta.servlet.jsp.jstl-api\3.0.0\jakarta.servlet.jsp.jstl-api-3.0.0.jar = 1757121789218
+C:\Users\UwU\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar = 1757121788819
+C:\Users\UwU\.m2\repository\jakarta\el\jakarta.el-api\5.0.0\jakarta.el-api-5.0.0.jar = 1761613442482
+C:\Users\UwU\.m2\repository\org\glassfish\web\jakarta.servlet.jsp.jstl\3.0.1\jakarta.servlet.jsp.jstl-3.0.1.jar = 1761355732520
+C:\Users\UwU\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar = 1761092086536
+C:\Users\UwU\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar = 1761092086755
+C:\Users\UwU\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar = 1761130642026
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\src\main\java = 1764494852698
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\allclasses-index.html = 1772761360824
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\allpackages-index.html = 1772761360829
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\element-list = 1772761359356
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\help-doc.html = 1772761360951
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\index-all.html = 1772761360926
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\index.html = 1772761360697
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\member-search-index.js = 1772761360854
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\module-search-index.js = 1772761360832
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\overview-summary.html = 1772761360939
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\overview-tree.html = 1772761360686
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\package-search-index.js = 1772761360847
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\search.html = 1772761360933
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\serialized-form.html = 1772761359524
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\tag-search-index.js = 1772761360858
+C:\Users\UwU\OneDrive\Documents\NetBeansProjects\OPD\target\reports\apidocs\type-search-index.js = 1772761360849

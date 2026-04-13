@@ -1,0 +1,177 @@
+Render Deployment Guide for OPD Java Web Application
+=====================================================
+
+This guide provides step-by-step instructions to deploy the OPD Java web application to Render.
+
+---
+
+### Step 1: Prepare Your Project for Deployment
+
+Before deploying, you must adapt your project to run in a cloud environment.
+
+#### A. Add the PostgreSQL JDBC Driver
+
+Render uses PostgreSQL databases. Add the necessary driver to your `pom.xml`.
+
+Action: Add this dependency to your `pom.xml` inside the `<dependencies>` section.
+
+```xml
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.7.3</version>
+</dependency>
+```
+
+#### B. Update Your Database Connection Logic (`DBUtil.java`)
+
+Your application must connect to the database using credentials provided by Render as environment variables. Render provides a single `DATABASE_URL`.
+
+Action: Replace your current `DBUtil.java` with the following production-ready code. This code handles both Render's environment and your local setup.
+
+```java
+package com.mycompany.opd.resources;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBUtil {
+
+    private static String dbUrl;
+    private static String dbUser;
+    private static String dbPassword;
+
+    static {
+        try {
+            // This will be set by Render in production
+            String databaseUrlEnv = System.getenv("DATABASE_URL");
+
+            if (databaseUrlEnv != null && !databaseUrlEnv.isEmpty()) {
+                // Production environment (Render)
+                System.out.println("INFO: Connecting using DATABASE_URL from environment.");
+                URI dbUri = new URI(databaseUrlEnv);
+
+                String[] userInfo = dbUri.getUserInfo().split(":");
+                dbUser = userInfo[0];
+                dbPassword = userInfo.length > 1 ? userInfo[1] : "";
+                dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+                
+                Class.forName("org.postgresql.Driver");
+
+            } else {
+                // Local development environment (fallback)
+                System.out.println("INFO: DATABASE_URL not found. Falling back to local MariaDB/MySQL config.");
+                dbUrl = "jdbc:mysql://localhost:3306/opd_db"; // Your local DB
+                dbUser = "root";
+                dbPassword = System.getenv("DB_PASSWORD") != null ? System.getenv("DB_PASSWORD") : "";
+                
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            }
+        } catch (URISyntaxException | ClassNotFoundException e) {
+            System.err.println("ERROR: Database configuration failed.");
+            e.printStackTrace();
+            throw new RuntimeException("Failed to configure database connection", e);
+        }
+    }
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+    }
+}
+```
+
+#### C. Handle File Uploads with a Render Disk
+
+Render's filesystem is ephemeral (files are deleted on restart). You must use a Render Disk for persistent storage.
+
+1.  **Mount a Disk**: In the Render dashboard, create a "Disk" and mount it to a path like `/var/data/uploads`.
+2.  **Update Your Code**: In every servlet that handles file uploads, change the save path to this absolute path.
+
+Action: Find the file-saving logic in your servlets and modify it.
+
+```java
+// Example of the change needed in your file upload servlets
+
+// This is the path that MUST match the mount path you set in Render's Disk settings.
+String basePath = "/var/data/uploads"; 
+String relativePath = "attachments"; // or "profile_pictures"
+String uploadPath = basePath + java.io.File.separator + relativePath;
+
+// Ensure the directory exists
+java.io.File uploadDir = new java.io.File(uploadPath);
+if (!uploadDir.exists()) {
+    uploadDir.mkdirs();
+}
+
+// The rest of your file saving logic remains the same
+jakarta.servlet.http.Part filePart = request.getPart("your_file_part_name");
+String fileName = ...; // your logic to get a unique filename
+filePart.write(uploadPath + java.io.File.separator + fileName);
+```
+
+---
+
+### Step 2: Deploy to Render
+
+1.  **Push to Git**: Commit all your changes and push them to a GitHub or GitLab repository.
+
+2.  **Create a New Web Service on Render**:
+    *   In your Render Dashboard, click **New > Web Service**.
+    *   Connect your Git repository.
+
+3.  **Configure the Service**:
+    *   **Name**: `opd-app`
+    *   **Runtime**: **Docker**
+    *   **Build Command**: `mvn clean install`
+    *   **Start Command**: `java -jar target/dependency/webapp-runner.jar --port $PORT target/*.war`
+
+4.  **Add `webapp-runner` to `pom.xml`**:
+    Action: Add the `maven-dependency-plugin` to your `pom.xml` inside the `<build><plugins>` section.
+
+    ```xml
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+            <execution>
+                <phase>package</phase>
+                <goals><goal>copy</goal></goals>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>com.github.jsimone</groupId>
+                            <artifactId>webapp-runner</artifactId>
+                            <version>9.0.89.0</version>
+                            <destFileName>webapp-runner.jar</destFileName>
+                        </artifactItem>
+                    </artifactItems>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+    ```
+
+5.  **Create a PostgreSQL Database on Render**:
+    *   In your Render Dashboard, click **New > PostgreSQL**.
+    *   Create the database and copy its **Internal Connection URL**.
+
+6.  **Set Environment Variables**:
+    *   Go to your Web Service's **Environment** tab.
+    *   Add the following variables:
+        *   `DATABASE_URL`: Paste the Internal Connection URL.
+        *   `SEMAPHORE_API_KEY`: `281d1a6932b90115541d1303e886c7a4`
+
+7.  **Create and Attach a Disk**:
+    *   Go to your Web Service's **Disks** tab.
+    *   Click **Add Disk**.
+    *   **Name**: `opd-uploads`
+    *   **Mount Path**: `/var/data/uploads` (must match the path in your code).
+    *   **Size**: 1 GB.
+
+8.  **Deploy**:
+    *   Click **Create Web Service**.
+    *   After the first deployment, connect to your new PostgreSQL database using an external tool (like DBeaver or psql) and run the PostgreSQL-compatible schema script to create your tables.

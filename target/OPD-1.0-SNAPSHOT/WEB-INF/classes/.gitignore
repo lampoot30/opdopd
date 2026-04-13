@@ -1,0 +1,17 @@
+# Environment variables
+.env
+
+# Maven build output
+/target/
+
+# IDE-specific files
+.vscode/
+*.iml
+*.ipr
+*.iws
+.idea/
+nb-configuration.xml
+nbactions.xml
+nb-private/
+build/
+dist/
